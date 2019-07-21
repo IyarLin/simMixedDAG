@@ -1,0 +1,15 @@
+Package: simMixedDAG
+Type: Package
+Title: Simulate mixed data type datasets from DAG models.
+Version: 1.0
+Date: 2019-07-18
+Author: Iyar Lin <iyarlin@gmail.com>
+Maintainer: Iyar Lin <iyarlin@gmail.com>
+Description: The simMixedDAG package contains functions for simulation of both
+  parametric and non-parametric datasets from DAG models. It also enables calculating
+  average treatment effects in DAG models.
+License: GPL-2
+Suggests: carData
+RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
+Encoding: UTF-8
