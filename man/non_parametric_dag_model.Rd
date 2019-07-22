@@ -37,6 +37,7 @@ The smooth functions \eqn{s_{ij}(.)} are obtained by fitting generalized
 additive model to the node (as a reponse) and it's parents (as predictors).
 }
 \examples{
+require(dagitty)
 g <- dagitty("dag {
 sales [pos=\\"0,0\\"]
              mkt [pos=\\"2,0\\"]

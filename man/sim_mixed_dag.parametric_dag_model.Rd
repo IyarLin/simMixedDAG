@@ -20,6 +20,7 @@ A dataset simulated from the input model dag.
 Simulate a dataset from a parametric dag model.
 }
 \examples{
+require(dagitty)
 g <- dagitty("dag {
 sales [pos=\\"0,0\\"]
              mkt [pos=\\"2,0\\"]

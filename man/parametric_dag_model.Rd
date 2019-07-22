@@ -52,6 +52,7 @@ of the parent node after which it is named.
 }
 }
 \examples{
+require(dagitty)
 g <- dagitty("dag {
 sales [pos=\\"0,0\\"]
              mkt [pos=\\"2,0\\"]

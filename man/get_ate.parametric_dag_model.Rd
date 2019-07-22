@@ -34,6 +34,7 @@ a treatment variable on an exposure variable given
 a parametric DAG model.
 }
 \examples{
+require(dagitty)
 g <- dagitty("dag {
 sales [pos=\\"0,0\\"]
              mkt [pos=\\"2,0\\"]

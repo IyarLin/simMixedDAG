@@ -21,6 +21,7 @@ A dataset simulated from the input dag model
 Simulate a dataset from a non parametric dag model.
 }
 \examples{
+require(dagitty)
 g <- dagitty("dag {
 sales [pos=\\"0,0\\"]
              mkt [pos=\\"2,0\\"]

@@ -9,6 +9,10 @@ Description: The simMixedDAG package contains functions for simulation of both
   parametric and non-parametric datasets from DAG models. It also enables calculating
   average treatment effects in DAG models.
 License: GPL-2
+Imports: 
+  dagitty, 
+  gam, 
+  mgcv
 Suggests: carData
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
