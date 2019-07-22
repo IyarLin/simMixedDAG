@@ -4,17 +4,17 @@
 \alias{get_ate.parametric_dag_model}
 \title{Get \eqn{ATE} for a paramteric DAG model}
 \usage{
-\method{get_ate}{parametric_dag_model}(dag_model, treatment = NULL,
-  treatment_vals = NULL, exposure = NULL, M = 1000)
+\method{get_ate}{parametric_dag_model}(dag_model, treatment,
+  treatment_vals = NULL, exposure, M = 1000)
 }
 \arguments{
 \item{dag_model}{An object of class "parametric_dag_model".}
 
-\item{treatment}{Name of the treatment variable.}
+\item{treatment}{Name of a \strong{single} treatment variable.}
 
 \item{treatment_vals}{A vector of treatment values to be considered.}
 
-\item{exposure}{Name of the exposure variable.}
+\item{exposure}{Name of a \strong{single} exposure variable.}
 
 \item{M}{Number of simulations to run. Each simulation dataset consists of 1000 observations.}
 }
@@ -54,9 +54,10 @@ param_dag_model <- parametric_dag_model(
     mkt = list(betas = list(comp = 0.6))
   )
 )
-sim_data <- sim_mixed_dag(param_dag_model)
+sim_data <- sim_mixed_dag(dag_model = param_dag_model)
 plot(sim_data$mkt, sim_data$sales) # confounded relation
-a <- get_ate(param_dag_model, treatment = "mkt", treatment_vals = -2:2, exposure = "sales")
+mkt_ATE_on_sales <- get_ate(dag_model = param_dag_model, treatment = "mkt", 
+                            treatment_vals = -2:2, exposure = "sales")
 print(a) # true relation
 }
 \seealso{

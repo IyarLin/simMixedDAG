@@ -21,6 +21,6 @@ param_dag_model <- parametric_dag_model(
   )
 )
 
-sim_data <- sim_mixed_dag(param_dag_model)
+sim_data <- sim_mixed_dag(dag_model = param_dag_model)
 
 plot(sim_data$mkt, sim_data$sales) # confounded relation

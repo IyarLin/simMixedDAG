@@ -14,10 +14,10 @@
 \item{...}{Additional arguments.}
 }
 \value{
-A dataset simulated from the input model dag.
+A dataset simulated from the input \code{dag_model}.
 }
 \description{
-Simulate a dataset from a parametric dag model.
+Simulate a dataset from a parametric DAG model.
 }
 \examples{
 require(dagitty)
@@ -43,7 +43,7 @@ param_dag_model <- parametric_dag_model(
   )
 )
 
-sim_data <- sim_mixed_dag(param_dag_model)
+sim_data <- sim_mixed_dag(dag_model = param_dag_model)
 
 plot(sim_data$mkt, sim_data$sales) # confounded relation
 }

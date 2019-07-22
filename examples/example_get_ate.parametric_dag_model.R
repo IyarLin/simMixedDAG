@@ -18,7 +18,8 @@ param_dag_model <- parametric_dag_model(
     mkt = list(betas = list(comp = 0.6))
   )
 )
-sim_data <- sim_mixed_dag(param_dag_model)
+sim_data <- sim_mixed_dag(dag_model = param_dag_model)
 plot(sim_data$mkt, sim_data$sales) # confounded relation
-a <- get_ate(param_dag_model, treatment = "mkt", treatment_vals = -2:2, exposure = "sales")
+mkt_ATE_on_sales <- get_ate(dag_model = param_dag_model, treatment = "mkt", 
+                            treatment_vals = -2:2, exposure = "sales")
 print(a) # true relation

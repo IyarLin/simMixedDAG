@@ -6,9 +6,9 @@
 #'   a parametric DAG model.
 #'
 #' @param dag_model An object of class "parametric_dag_model".
-#' @param treatment Name of the treatment variable.
+#' @param treatment Name of a **single** treatment variable.
 #' @param treatment_vals A vector of treatment values to be considered.
-#' @param exposure Name of the exposure variable.
+#' @param exposure Name of a **single** exposure variable.
 #' @param M Number of simulations to run. Each simulation dataset consists of 1000 observations.
 #' @return A data.frame with 3 columns:
 #'   1. From: The baseline treatment value.
@@ -20,10 +20,12 @@
 #' @seealso \code{\link{get_ate.non_parametric_dag_model}} for non parametric dag model \eqn{ATE} calculation.
 #' @export
 
-get_ate.parametric_dag_model <- function(dag_model, treatment = NULL, treatment_vals = NULL, exposure = NULL, M = 1000) {
+get_ate.parametric_dag_model <- function(dag_model, treatment, treatment_vals = NULL, exposure, M = 1000) {
   N <- 1000
   dag <- dag_model$dag
   f.args <- dag_model$f.args
+  if(length(treatment) > 1) stop("get_ate supports ate calculation for a single treatment only")
+  if(length(exposure) > 1) stop("get_ate supports ate calculation for a single exposure only")
   if (f.args[[exposure]]$levels > 2) stop("Exposure must be either numeric (levels = 1) or binary (levels = 2)")
 
   if (is.null(treatment_vals)) {

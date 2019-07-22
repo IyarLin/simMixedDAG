@@ -54,7 +54,7 @@ g <- dagitty("dag {
              }")
 plot(g)
 non_param_dag_model <- non_parametric_dag_model(dag = g, data = GSSvocab)
-sim_data <- sim_mixed_dag(non_param_dag_model, N = 30000)
+sim_data <- sim_mixed_dag(dag_model = non_param_dag_model, N = 30000)
 boxplot(vocab ~ nativeBorn, data = sim_data)
 # verify distribtion in simulated dataset looks similar
 boxplot(vocab ~ nativeBorn, data = GSSvocab)

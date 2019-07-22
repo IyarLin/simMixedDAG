@@ -4,17 +4,17 @@
 \alias{get_ate.non_parametric_dag_model}
 \title{Get \eqn{ATE} for a non paramteric DAG model}
 \usage{
-\method{get_ate}{non_parametric_dag_model}(dag_model, treatment = NULL,
-  treatment_vals = NULL, exposure = NULL, M = 1000)
+\method{get_ate}{non_parametric_dag_model}(dag_model, treatment,
+  treatment_vals = NULL, exposure, M = 1000)
 }
 \arguments{
 \item{dag_model}{An object of class "non_parametric_dag_model".}
 
-\item{treatment}{Name of the treatment variable.}
+\item{treatment}{Name of a \strong{single} treatment variable.}
 
 \item{treatment_vals}{A vector of treatment values to be considered.}
 
-\item{exposure}{Name of the exposure variable.}
+\item{exposure}{Name of a \strong{single} exposure variable.}
 
 \item{M}{Number of simulations to run. Each simulation dataset consists of 1000 observations.}
 }
@@ -52,7 +52,7 @@ g <- dagitty("dag {
 plot(g)
 non_param_dag_model <- non_parametric_dag_model(dag = g, data = GSSvocab)
 
-nativeBorn_ate_on_vocab <- get_ate(non_param_dag_model, treatment = "nativeBorn", exposure = "vocab")
+nativeBorn_ATE_on_vocab <- get_ate(dag_model = non_param_dag_model, treatment = "nativeBorn", exposure = "vocab")
 print(nativeBorn_ate_on_vocab)
 }
 \seealso{

@@ -6,9 +6,9 @@
 #'   a non parametric DAG model.
 #'
 #' @param dag_model An object of class "non_parametric_dag_model".
-#' @param treatment Name of the treatment variable.
+#' @param treatment Name of a **single** treatment variable.
 #' @param treatment_vals A vector of treatment values to be considered.
-#' @param exposure Name of the exposure variable.
+#' @param exposure Name of a **single** exposure variable.
 #' @param M Number of simulations to run. Each simulation dataset consists of 1000 observations.
 #' @return A data.frame with 3 columns:
 #'   1. From: The baseline treatment value.
@@ -20,10 +20,12 @@
 #' @importFrom dagitty parents
 #' @export
 
-get_ate.non_parametric_dag_model <- function(dag_model, treatment = NULL, treatment_vals = NULL, exposure = NULL, M = 1000) {
+get_ate.non_parametric_dag_model <- function(dag_model, treatment, treatment_vals = NULL, exposure, M = 1000) {
   N <- 1000
   dag <- dag_model$dag
   gam_fits <- dag_model$gam_fits
+  if(length(treatment) > 1) stop("get_ate supports ate calculation for a single treatment only")
+  if(length(exposure) > 1) stop("get_ate supports ate calculation for a single exposure only")
   if (gam_fits[[exposure]]$node_type != "continuous") stop("Exposure must be continuous")
 
   if (is.null(treatment_vals)) {

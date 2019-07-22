@@ -15,39 +15,34 @@
 \item{...}{Additional arguments}
 }
 \value{
-A dataset simulated from the input dag model
+A dataset simulated from the input \code{dag_model}.
 }
 \description{
-Simulate a dataset from a non parametric dag model.
+Simulate a dataset from a non parametric DAG model.
 }
 \examples{
-require(dagitty)
+require(carData); require(dagitty)
+data("GSSvocab")
+GSSvocab <- GSSvocab[complete.cases(GSSvocab), ]
 g <- dagitty("dag {
-sales [pos=\\"0,0\\"]
-             mkt [pos=\\"2,0\\"]
-             comp [pos=\\"1,1\\"]
-             visits [pos=\\"1,0\\"]
-             visits -> sales
-             mkt -> visits
-             comp -> mkt
-             comp -> sales
+             ageGroup [pos=\\"0,0\\"]
+             vocab [pos=\\"1,-1\\"]
+             nativeBorn [pos=\\"2,-2\\"]
+             educ [pos=\\"3,-1\\"]
+             gender [pos=\\"4,0\\"]
+             nativeBorn -> educ
+             nativeBorn -> vocab
+             educ -> vocab
+             gender -> educ
+             ageGroup -> vocab
              }")
-
 plot(g)
-
-param_dag_model <- parametric_dag_model(
-  dag = g,
-  f.args = list(
-    sales = list(betas = list(visits = 0.3, comp = -0.9)),
-    visits = list(betas = list(mkt = 0.5)),
-    mkt = list(betas = list(comp = 0.6))
-  )
-)
-
-sim_data <- sim_mixed_dag(param_dag_model)
-
-plot(sim_data$mkt, sim_data$sales) # confounded relation
+non_param_dag_model <- non_parametric_dag_model(dag = g, data = GSSvocab)
+sim_data <- sim_mixed_dag(dag_model = non_param_dag_model, N = 30000)
+boxplot(vocab ~ nativeBorn, data = sim_data)
+# verify distribtion in simulated dataset looks similar
+boxplot(vocab ~ nativeBorn, data = GSSvocab)
 }
 \seealso{
-\code{link{sim_mixed_dag.parametric_dag_model}} for parametric dag simulation.
+\code{\link{sim_mixed_dag.parametric_dag_model}} for parametric dag simulation.
 }

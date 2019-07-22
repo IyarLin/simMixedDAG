@@ -1,13 +1,13 @@
 #' @title Simulate a dataset from a non parametric DAG model
 #'
-#' @description Simulate a dataset from a non parametric dag model.
+#' @description Simulate a dataset from a non parametric DAG model.
 #'
 #' @param dag_model An object of class "non_parametric_dag_model".
 #' @param N Number of observations to simulate.
 #' @param ... Additional arguments
-#' @return A dataset simulated from the input dag model
-#' @example examples/example_sim_mixed_dag.parametric_dag_model.R
-#' @seealso \code{link{sim_mixed_dag.parametric_dag_model}} for parametric dag simulation.
+#' @return A dataset simulated from the input \code{dag_model}.
+#' @example examples/example_sim_mixed_dag.non_parametric_dag_model.R
+#' @seealso \code{\link{sim_mixed_dag.parametric_dag_model}} for parametric dag simulation.
 #' @import gam
 #' @importFrom mgcv multinom
 #' @export
