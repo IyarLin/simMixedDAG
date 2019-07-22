@@ -1,6 +1,6 @@
 require(carData); require(dagitty)
 data("GSSvocab")
-GSSvocab <- GSSvocab %>% filter(complete.cases(.))
+GSSvocab <- GSSvocab[complete.cases(GSSvocab), ]
 g <- dagitty("dag {
              ageGroup [pos=\"0,0\"]
              vocab [pos=\"1,-1\"]

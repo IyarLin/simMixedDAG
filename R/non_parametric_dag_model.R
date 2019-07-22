@@ -21,7 +21,7 @@
 #'   1. dag: The model DAG
 #'   1. gam_fits: All smoothing functions and other information required for simulating
 #'     new datasets from the specified dag model
-#' @example examples/example_sim_mixed_dag.parametric_dag_model.R
+#' @example examples/example_sim_mixed_dag.non_parametric_dag_model.R
 #' @seealso \code{\link{parametric_dag_model}} for parametric DAG model specification. Methods for
 #'   the non_parametric_dag_model class include \code{\link{sim_mixed_dag.non_parametric_dag_model}} for
 #'   simulating datasets and \code{\link{get_ate.non_parametric_dag_model}} for getting \eqn{ATE}s.
@@ -78,7 +78,7 @@ non_parametric_dag_model <- function(dag, data) {
       }), collapse = " + ")))
       dat <- data[c(var, var_parents)]
       ans[[var]]$gam_model <- gam(formula = form, family = "gaussian", data = dat)
-      ans[[var]]$gam_model$sd <- sd(dat[[var]])
+      ans[[var]]$gam_model$sd <- sd(predict(ans[[var]]$gam_model) - dat[[var]])
     }
   }
   ans <- list(dag = dag, gam_fits = ans)
