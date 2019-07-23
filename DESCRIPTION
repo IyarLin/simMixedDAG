@@ -2,7 +2,7 @@ Package: simMixedDAG
 Type: Package
 Title: Simulate mixed data type datasets from DAG models.
 Version: 1.0
-Date: 2019-07-18
+Date: 2019-07-23
 Author: Iyar Lin <iyarlin@gmail.com>
 Maintainer: Iyar Lin <iyarlin@gmail.com>
 Description: The simMixedDAG package contains functions for simulation of both
