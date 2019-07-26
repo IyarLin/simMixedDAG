@@ -28,6 +28,7 @@
 #' @importFrom dagitty parents
 #' @import gam
 #' @importFrom mgcv gam gam.fit s gam.control
+#' @importFrom stats as.formula sd
 #' @export
 
 
