@@ -18,6 +18,8 @@
 #' @example examples/example_get_ate.non_parametric_dag_model.R
 #' @seealso \code{\link{get_ate.parametric_dag_model}} for parametric DAG model \eqn{ATE} calculation.
 #' @importFrom dagitty parents
+#' @importFrom stats quantile
+#' @importFrom utils head tail
 #' @export
 
 get_ate.non_parametric_dag_model <- function(dag_model, treatment, treatment_vals = NULL, exposure, M = 1000) {
