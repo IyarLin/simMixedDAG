@@ -16,5 +16,7 @@ g <- dagitty("dag {
 plot(g)
 non_param_dag_model <- non_parametric_dag_model(dag = g, data = GSSvocab)
 
-nativeBorn_ATE_on_vocab <- get_ate(dag_model = non_param_dag_model, treatment = "nativeBorn", exposure = "vocab")
+nativeBorn_ATE_on_vocab <- get_ate(dag_model=non_param_dag_model, 
+                                   treatment="nativeBorn", 
+                                   exposure="vocab")
 print(nativeBorn_ATE_on_vocab)
