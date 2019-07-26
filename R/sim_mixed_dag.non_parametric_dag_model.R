@@ -10,6 +10,7 @@
 #' @seealso \code{\link{sim_mixed_dag.parametric_dag_model}} for parametric dag simulation.
 #' @import gam
 #' @importFrom mgcv multinom
+#' @importFrom stats predict rbinom rmultinom
 #' @export
 
 sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
