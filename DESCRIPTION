@@ -8,7 +8,7 @@ Maintainer: Iyar Lin <iyarlin@gmail.com>
 Description: The simMixedDAG package contains functions for simulation of both
   parametric and non-parametric datasets from DAG models. It also enables calculating
   average treatment effects in DAG models.
-License: GPL-2
+License: file LICENSE
 Imports: 
   dagitty, 
   gam, 
