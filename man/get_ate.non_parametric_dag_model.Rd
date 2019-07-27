@@ -53,7 +53,7 @@ plot(g)
 non_param_dag_model <- non_parametric_dag_model(dag = g, data = GSSvocab)
 
 nativeBorn_ATE_on_vocab <- get_ate(dag_model = non_param_dag_model, treatment = "nativeBorn", exposure = "vocab")
-print(nativeBorn_ate_on_vocab)
+print(nativeBorn_ATE_on_vocab)
 }
 \seealso{
 \code{\link{get_ate.parametric_dag_model}} for parametric DAG model \eqn{ATE} calculation.
