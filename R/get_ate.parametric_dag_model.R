@@ -17,6 +17,7 @@
 #'   value from "From" to "To.
 #' @example examples/example_get_ate.parametric_dag_model.R
 #' @importFrom dagitty parents
+#' @importFrom stats quantile
 #' @seealso \code{\link{get_ate.non_parametric_dag_model}} for non parametric dag model \eqn{ATE} calculation.
 #' @export
 
