@@ -42,7 +42,6 @@ sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
             assign(parent, do.call(f_continuous, list(
               gam_model = gam_fits[[parent]]$gam_model,
               parents = gam_fits[[parent]]$parents,
-              target_levels = gam_fits[[parent]]$target_levels,
               N = N,
               env = env
             ), envir = env), pos = env)
@@ -90,7 +89,9 @@ sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
       }
       newdata <- as.data.frame(newdata)
     }
-    return(as.vector(predict(gam_model, newdata, type = "response")) + rnorm(n = nrow(newdata), sd = gam_model$sd))
+    return(as.vector(predict(gam_model, newdata, type = "response")) + 
+             sample(x = gam_model$error_dens$x, size = nrow(newdata), 
+                    replace = T, prob = gam_model$error_dens$y))
   }
   
   for (var in vars) {

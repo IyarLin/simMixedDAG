@@ -58,7 +58,7 @@ sim_data <- sim_mixed_dag(dag_model = param_dag_model)
 plot(sim_data$mkt, sim_data$sales) # confounded relation
 mkt_ATE_on_sales <- get_ate(dag_model = param_dag_model, treatment = "mkt", 
                             treatment_vals = -2:2, exposure = "sales")
-print(a) # true relation
+print(mkt_ATE_on_sales) # true relation
 }
 \seealso{
 \code{\link{get_ate.non_parametric_dag_model}} for non parametric dag model \eqn{ATE} calculation.

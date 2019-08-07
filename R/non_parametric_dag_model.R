@@ -70,16 +70,20 @@ non_parametric_dag_model <- function(dag, data) {
       ans[[var]]$gam_model <- gam(forms, family = if (num_levels == 2) "binomial" else multinom(K = num_levels - 1), data = dat)
     } else {
       ans[[var]]$node_type <- "continuous"
-      form <- as.formula(paste0(var, " ~ ", paste0(sapply(var_parents, function(var_parent) {
-        if (class(data[[var_parent]]) == "factor") {
-          return(var_parent)
-        } else {
-          return(paste0("s(", var_parent, ")"))
-        }
-      }), collapse = " + ")))
+      if(length(var_parents) == 0){
+        form <- as.formula(paste0(var, " ~ 1"))
+      } else {
+        form <- as.formula(paste0(var, " ~ ", paste0(sapply(var_parents, function(var_parent) {
+          if (class(data[[var_parent]]) == "factor") {
+            return(var_parent)
+          } else {
+            return(paste0("s(", var_parent, ")"))
+          }
+        }), collapse = " + ")))
+      }
       dat <- data[c(var, var_parents)]
       ans[[var]]$gam_model <- gam(formula = form, family = "gaussian", data = dat)
-      ans[[var]]$gam_model$sd <- sd(predict(ans[[var]]$gam_model) - dat[[var]])
+      ans[[var]]$gam_model$error_dens <- density(predict(ans[[var]]$gam_model) - dat[[var]])
     }
   }
   ans <- list(dag = dag, gam_fits = ans)
