@@ -63,7 +63,7 @@ sim_mixed_dag.parametric_dag_model <- function(dag_model, N = 1000, ...) {
   }
 
   for (var in vars) {
-    if (!exists(var, envir = env)) {
+    if (!exists(var, envir = env, mode = "numeric")) {
       assign(var, do.call(f, append(list(vars = parents[[var]], env = env, result_var = var), f.args[[var]])), envir = env)
     }
   }

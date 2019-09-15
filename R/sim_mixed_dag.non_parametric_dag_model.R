@@ -95,7 +95,7 @@ sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
   }
   
   for (var in vars) {
-    if (!exists(var, envir = env)) {
+    if (!exists(var, envir = env, mode = "numeric")) {
       if (gam_fits[[var]]$node_type == "discrete") {
         assign(var, do.call(f_discrete, list(
           gam_model = gam_fits[[var]]$gam_model,
