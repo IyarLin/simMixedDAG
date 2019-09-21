@@ -54,7 +54,7 @@ sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
     }
     pred <- predict(gam_model, newdata, type = "response")
     if (length(target_levels) == 2) {
-      return(target_levels[sapply(pred, function(p) rbinom(1, 1, p)) + 1])
+      return(factor(target_levels[sapply(pred, function(p) rbinom(1, 1, p)) + 1], levels = target_levels))
     } else {
       return(factor(target_levels[apply(pred, 1, function(p_vec) which(rmultinom(1, 1, p_vec) == 1))], levels = target_levels))
     }
