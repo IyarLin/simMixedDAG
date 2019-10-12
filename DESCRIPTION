@@ -10,10 +10,12 @@ Description: The simMixedDAG package contains functions for simulation of both
   average treatment effects in DAG models.
 License: file LICENSE
 Imports: 
-  dagitty, 
-  gam, 
-  mgcv
-Suggests: carData
+  dagitty (>= 0.2.2), 
+  gam (>= 1.16.1), 
+  mgcv (>= 1.8.28)
+Suggests: 
+  carData (>= 3.2.0)
+Depends: R (>= 3.5.1)
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8

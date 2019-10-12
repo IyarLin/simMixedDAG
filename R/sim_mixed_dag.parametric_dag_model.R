@@ -17,7 +17,7 @@ sim_mixed_dag.parametric_dag_model <- function(dag_model, N = 1000, ...) {
   if (sum(names(f.args) %in% names(dag)) < length(f.args)) stop("some variable entries in f.args don't match node names in supplied DAG")
 
   env <- environment()
-  if(length(list(...)==1)) list2env(list(...)[[1]], envir = env)
+  if (length(list(...) == 1)) list2env(list(...)[[1]], envir = env)
   vars <- names(dag)
   parents <- setNames(lapply(vars, function(var) parents(dag, var)), vars)
   if (sum(duplicated(names(f.args))) > 0) stop("duplicate f.args variable entries")

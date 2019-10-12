@@ -40,19 +40,19 @@ non_parametric_dag_model <- function(dag, data) {
   data[character_variables] <- lapply(data[character_variables], function(x) factor(x))
   two_level_variables <- which(sapply(data, function(x) length(unique(x)) == 2))
   data[two_level_variables] <- lapply(data[two_level_variables], function(x) factor(x)) # code 2 value variables as binary
-  
+
   vars <- names(dag)
   ans <- setNames(object = vector(mode = "list", length = length(vars)), nm = vars)
-  
+
   for (var in vars) {
     var_parents <- parents(dag, var)
     ans[[var]]$parents <- var_parents
-    
+
     if (class(data[[var]]) == "factor") {
       ans[[var]]$node_type <- "discrete"
       ans[[var]]$target_levels <- levels(data[[var]])
       num_levels <- length(levels(data[[var]]))
-      if(length(var_parents) == 0){
+      if (length(var_parents) == 0) {
         forms <- " ~ 1"
       } else {
         forms <- paste0(" ~ ", paste0(sapply(var_parents, function(var_parent) {
@@ -64,13 +64,13 @@ non_parametric_dag_model <- function(dag, data) {
         }), collapse = " + "))
       }
       forms <- lapply(unlist(strsplit(paste0(var, paste0(rep(forms, num_levels - 1), collapse = ", ")), ",")), as.formula)
-      if(length(forms) == 1) forms <- forms[[1]]
+      if (length(forms) == 1) forms <- forms[[1]]
       dat <- data[c(var, var_parents)]
       dat[[var]] <- as.integer(dat[[var]]) - 1
       ans[[var]]$gam_model <- gam(forms, family = if (num_levels == 2) "binomial" else multinom(K = num_levels - 1), data = dat)
     } else {
       ans[[var]]$node_type <- "continuous"
-      if(length(var_parents) == 0){
+      if (length(var_parents) == 0) {
         form <- as.formula(paste0(var, " ~ 1"))
       } else {
         form <- as.formula(paste0(var, " ~ ", paste0(sapply(var_parents, function(var_parent) {

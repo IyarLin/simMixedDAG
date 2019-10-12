@@ -26,15 +26,15 @@ get_ate.non_parametric_dag_model <- function(dag_model, treatment, treatment_val
   N <- 1000
   dag <- dag_model$dag
   gam_fits <- dag_model$gam_fits
-  if(length(treatment) > 1) stop("get_ate supports ate calculation for a single treatment only")
-  if(length(exposure) > 1) stop("get_ate supports ate calculation for a single exposure only")
+  if (length(treatment) > 1) stop("get_ate supports ate calculation for a single treatment only")
+  if (length(exposure) > 1) stop("get_ate supports ate calculation for a single exposure only")
   if (gam_fits[[exposure]]$node_type != "continuous") stop("Exposure must be continuous")
 
   if (is.null(treatment_vals)) {
-    if(gam_fits[[treatment]]$node_type == "continuous"){
-    sample_treatment <- sim_mixed_dag(dag_model)[[treatment]]
-    treatment_vals <- unname(quantile(sample_treatment, seq(0.05, 0.95, by = 0.3)))
-    } else if (gam_fits[[treatment]]$node_type == "discrete"){
+    if (gam_fits[[treatment]]$node_type == "continuous") {
+      sample_treatment <- sim_mixed_dag(dag_model)[[treatment]]
+      treatment_vals <- unname(quantile(sample_treatment, seq(0.05, 0.95, by = 0.3)))
+    } else if (gam_fits[[treatment]]$node_type == "discrete") {
       treatment_vals <- factor(non_param_dag_model$gam_fits[[treatment]]$target_levels)
     }
   }

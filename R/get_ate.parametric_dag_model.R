@@ -25,8 +25,8 @@ get_ate.parametric_dag_model <- function(dag_model, treatment, treatment_vals = 
   N <- 1000
   dag <- dag_model$dag
   f.args <- dag_model$f.args
-  if(length(treatment) > 1) stop("get_ate supports ate calculation for a single treatment only")
-  if(length(exposure) > 1) stop("get_ate supports ate calculation for a single exposure only")
+  if (length(treatment) > 1) stop("get_ate supports ate calculation for a single treatment only")
+  if (length(exposure) > 1) stop("get_ate supports ate calculation for a single exposure only")
   if (f.args[[exposure]]$levels > 2) stop("Exposure must be either numeric (levels = 1) or binary (levels = 2)")
 
   if (is.null(treatment_vals)) {

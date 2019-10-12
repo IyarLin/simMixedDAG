@@ -17,14 +17,14 @@ sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
   dag <- dag_model$dag
   gam_fits <- dag_model$gam_fits
   if (mean(names(gam_fits) %in% names(dag)) != 1 | length(names(dag)) != length(names(gam_fits))) stop("some variable entries in gam_fits don't match node names in supplied DAG")
-  
+
   env <- environment()
-  if(length(list(...)==1)) list2env(list(...)[[1]], envir = env)
+  if (length(list(...) == 1)) list2env(list(...)[[1]], envir = env)
   vars <- names(dag)
-  
+
   f_discrete <- function(gam_model, target_levels, parents, N, env) {
-    if(length(parents) == 0){
-      newdata <- data.frame(const = rep(1,N))
+    if (length(parents) == 0) {
+      newdata <- data.frame(const = rep(1, N))
     } else {
       newdata <- list()
       for (parent in parents) {
@@ -49,7 +49,7 @@ sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
           newdata[[parent]] <- eval(parse(text = parent), envir = env)
         }
       }
-      
+
       newdata <- as.data.frame(lapply(newdata, function(x) replace(x, is.na(x), sample(x = x[!is.na(x)], sum(is.na(x)), replace = T)))) # TODO: figure out why this is needed
     }
     pred <- predict(gam_model, newdata, type = "response")
@@ -59,9 +59,9 @@ sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
       return(factor(target_levels[apply(pred, 1, function(p_vec) which(rmultinom(1, 1, p_vec) == 1))], levels = target_levels))
     }
   }
-  
+
   f_continuous <- function(gam_model, parents, N, env) {
-    if(length(parents) == 0) {
+    if (length(parents) == 0) {
       newdata <- data.frame(const = rep(1, N))
     } else {
       newdata <- list()
@@ -89,11 +89,13 @@ sim_mixed_dag.non_parametric_dag_model <- function(dag_model, N = 1000, ...) {
       }
       newdata <- as.data.frame(newdata)
     }
-    return(as.vector(predict(gam_model, newdata, type = "response")) + 
-             sample(x = gam_model$error_dens$x, size = nrow(newdata), 
-                    replace = T, prob = gam_model$error_dens$y))
+    return(as.vector(predict(gam_model, newdata, type = "response")) +
+      sample(
+        x = gam_model$error_dens$x, size = nrow(newdata),
+        replace = T, prob = gam_model$error_dens$y
+      ))
   }
-  
+
   for (var in vars) {
     if (!exists(var, envir = env, mode = "numeric")) {
       if (gam_fits[[var]]$node_type == "discrete") {
